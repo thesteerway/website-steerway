@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900">
+  <defs>
+    <radialGradient id="b-bloom" cx="0.5" cy="0.44" r="0.55">
+      <stop offset="0" stop-color="#c3a268" stop-opacity="0.2"/>
+      <stop offset="1" stop-color="#c3a268" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="b-gold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f5e6c4"/>
+      <stop offset="1" stop-color="#b4924f"/>
+    </linearGradient>
+    <linearGradient id="b-core" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f0dcae" stop-opacity="0"/>
+      <stop offset="0.35" stop-color="#f0dcae" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#f0dcae" stop-opacity="0.15"/>
+    </linearGradient>
+    <filter id="b-glow" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="12"/>
+    </filter>
+    <filter id="b-soft" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="28"/>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="900" fill="#0a0a0c"/>
+  <g stroke="rgba(236,231,221,0.06)">
+    <line x1="800" y1="540" x2="60" y2="900"/><line x1="800" y1="540" x2="360" y2="900"/><line x1="800" y1="540" x2="660" y2="900"/><line x1="800" y1="540" x2="940" y2="900"/><line x1="800" y1="540" x2="1240" y2="900"/><line x1="800" y1="540" x2="1540" y2="900"/>
+    <path d="M 220 700 Q 800 660 1380 700" fill="none"/>
+    <path d="M 100 790 Q 800 740 1500 790" fill="none"/>
+  </g>
+  <rect width="1600" height="900" fill="url(#b-bloom)"/>
+
+  <!-- THE STACK: what the visitor sees floats on the layers nobody sees -->
+  <ellipse cx="800" cy="740" rx="460" ry="62" fill="#000" opacity="0.6" filter="url(#b-soft)"/>
+
+  <!-- the core: one column of light through every layer -->
+  <rect x="794" y="150" width="12" height="580" fill="url(#b-core)" filter="url(#b-glow)" opacity="0.7"/>
+  <rect x="797" y="150" width="6" height="580" fill="url(#b-core)"/>
+
+  <!-- layer 1: the foundation (largest) -->
+  <g>
+    <polygon points="800,556 1180,694 800,832 420,694" fill="rgba(236,231,221,0.05)" stroke="rgba(236,231,221,0.35)" stroke-width="1.5"/>
+    <polygon points="1180,694 800,832 800,868 1180,730" fill="rgba(236,231,221,0.025)" stroke="rgba(236,231,221,0.2)"/>
+    <polygon points="420,694 800,832 800,868 420,730" fill="rgba(0,0,0,0.4)" stroke="rgba(236,231,221,0.2)"/>
+  </g>
+  <!-- layer 2 -->
+  <g>
+    <polygon points="800,440 1080,542 800,644 520,542" fill="rgba(236,231,221,0.06)" stroke="rgba(236,231,221,0.4)" stroke-width="1.5"/>
+    <polygon points="1080,542 800,644 800,678 1080,576" fill="rgba(236,231,221,0.03)" stroke="rgba(236,231,221,0.2)"/>
+    <polygon points="520,542 800,644 800,678 520,576" fill="rgba(0,0,0,0.4)" stroke="rgba(236,231,221,0.2)"/>
+  </g>
+  <!-- layer 3: gold-edged, closest to the surface -->
+  <g>
+    <polygon points="800,336 990,406 800,476 610,406" fill="rgba(195,162,104,0.12)" stroke="url(#b-gold)" stroke-width="2"/>
+    <polygon points="990,406 800,476 800,508 990,438" fill="rgba(195,162,104,0.06)" stroke="rgba(195,162,104,0.5)"/>
+    <polygon points="610,406 800,476 800,508 610,438" fill="rgba(90,69,38,0.35)" stroke="rgba(195,162,104,0.5)"/>
+  </g>
+
+  <!-- the page: a small pristine screen floating on top of it all -->
+  <g transform="translate(716,150)">
+    <rect width="168" height="118" rx="10" transform="skewY(-6)" fill="rgba(19,19,22,0.95)" stroke="rgba(236,231,221,0.75)" stroke-width="1.6"/>
+    <g transform="skewY(-6)">
+      <line x1="0" y1="28" x2="168" y2="28" stroke="rgba(236,231,221,0.3)"/>
+      <circle cx="15" cy="14" r="3.4" fill="none" stroke="rgba(236,231,221,0.5)"/>
+      <line x1="16" y1="52" x2="120" y2="52" stroke="rgba(236,231,221,0.55)" stroke-width="5" stroke-linecap="round"/>
+      <line x1="16" y1="72" x2="94" y2="72" stroke="rgba(236,231,221,0.3)" stroke-width="5" stroke-linecap="round"/>
+      <rect x="16" y="88" width="44" height="16" rx="3" fill="url(#b-gold)"/>
+    </g>
+    <circle cx="84" cy="52" r="60" fill="#f0dcae" opacity="0.12" filter="url(#b-glow)"/>
+  </g>
+
+  <!-- soundings: tiny ticks naming the layers, whisper-quiet -->
+  <g font-family="ui-monospace, monospace" font-size="18" fill="rgba(131,127,119,0.9)">
+    <line x1="1090" y1="548" x2="1180" y2="512" stroke="rgba(195,162,104,0.35)"/>
+    <text x="1190" y="508" letter-spacing="3">INDEX</text>
+    <line x1="994" y1="410" x2="1080" y2="376" stroke="rgba(195,162,104,0.35)"/>
+    <text x="1090" y="372" letter-spacing="3">SPEED</text>
+    <line x1="1186" y1="700" x2="1276" y2="666" stroke="rgba(195,162,104,0.35)"/>
+    <text x="1286" y="662" letter-spacing="3">SCHEMA</text>
+  </g>
+
+  <g fill="#ece7dd">
+    <circle cx="330" cy="240" r="2" opacity="0.4"/>
+    <circle cx="520" cy="170" r="1.6" opacity="0.3"/>
+    <circle cx="1260" cy="210" r="2.2" opacity="0.45"/>
+    <circle cx="1380" cy="470" r="1.6" opacity="0.3"/>
+    <circle cx="240" cy="470" r="1.8" opacity="0.35"/>
+    <circle cx="1090" cy="140" r="1.5" opacity="0.3"/>
+  </g>
+
+  <!-- caption chip: uniform pill, right-aligned across the series -->
+  <g transform="translate(1146,790)" font-family="ui-monospace, monospace">
+    <rect width="384" height="52" rx="26" fill="rgba(19,19,22,0.88)" stroke="rgba(195,162,104,0.4)"/>
+    <circle cx="26" cy="26" r="5" fill="#f0dcae"/>
+    <text x="48" y="33" fill="#c3a268" font-size="17" letter-spacing="2.5">RANK RESTS ON LAYERS</text>
+  </g>
+</svg>

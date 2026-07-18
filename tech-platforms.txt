@@ -1,0 +1,8 @@
+-cloudflare
+-resend
+-GitHub
+-vercel
+-zoho mail
+-namecheap
+
+change the favicon/tabicon of the website

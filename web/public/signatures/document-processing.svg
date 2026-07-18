@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900">
+  <defs>
+    <radialGradient id="a-bloom" cx="0.5" cy="0.44" r="0.55">
+      <stop offset="0" stop-color="#c3a268" stop-opacity="0.2"/>
+      <stop offset="1" stop-color="#c3a268" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="a-gold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f5e6c4"/>
+      <stop offset="1" stop-color="#b4924f"/>
+    </linearGradient>
+    <linearGradient id="a-beam" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f0dcae" stop-opacity="0"/>
+      <stop offset="0.5" stop-color="#f0dcae" stop-opacity="0.8"/>
+      <stop offset="1" stop-color="#f0dcae" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="a-glow" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="12"/>
+    </filter>
+    <filter id="a-soft" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="28"/>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="900" fill="#0a0a0c"/>
+  <!-- stage: receding floor grid -->
+  <g stroke="rgba(236,231,221,0.06)">
+    <line x1="800" y1="540" x2="60" y2="900"/><line x1="800" y1="540" x2="360" y2="900"/><line x1="800" y1="540" x2="660" y2="900"/><line x1="800" y1="540" x2="940" y2="900"/><line x1="800" y1="540" x2="1240" y2="900"/><line x1="800" y1="540" x2="1540" y2="900"/>
+    <path d="M 220 700 Q 800 660 1380 700" fill="none"/>
+    <path d="M 100 790 Q 800 740 1500 790" fill="none"/>
+  </g>
+  <rect width="1600" height="900" fill="url(#a-bloom)"/>
+
+  <!-- THE PORTAL: paper enters flat, leaves as light -->
+  <!-- platform slab -->
+  <g>
+    <ellipse cx="800" cy="672" rx="430" ry="60" fill="#000" opacity="0.6" filter="url(#a-soft)"/>
+    <polygon points="800,478 1210,624 800,770 390,624" fill="rgba(236,231,221,0.05)" stroke="rgba(236,231,221,0.35)" stroke-width="1.5"/>
+    <polygon points="1210,624 800,770 800,806 1210,660" fill="rgba(236,231,221,0.025)" stroke="rgba(236,231,221,0.2)"/>
+    <polygon points="390,624 800,770 800,806 390,660" fill="rgba(0,0,0,0.4)" stroke="rgba(236,231,221,0.2)"/>
+  </g>
+
+  <!-- the standing ring gate -->
+  <g transform="translate(800,470)">
+    <ellipse rx="26" ry="176" fill="none" stroke="url(#a-gold)" stroke-width="5" filter="url(#a-glow)" opacity="0.7"/>
+    <ellipse rx="26" ry="176" fill="none" stroke="url(#a-gold)" stroke-width="5"/>
+    <ellipse rx="14" ry="150" fill="none" stroke="rgba(240,220,170,0.35)" stroke-width="1.6"/>
+    <!-- light falling through the gate onto the slab -->
+    <polygon points="-8,150 8,150 120,196 -120,196" fill="url(#a-beam)" opacity="0.5"/>
+  </g>
+
+  <!-- incoming: white sheets gliding across the slab -->
+  <g stroke="rgba(236,231,221,0.7)" stroke-width="1.5">
+    <polygon points="470,610 580,650 520,674 410,634" fill="#ece7dd" opacity="0.95"/>
+    <polygon points="560,570 660,606 610,626 510,590" fill="#ece7dd" opacity="0.7"/>
+    <polygon points="650,536 730,566 690,582 610,552" fill="#ece7dd" opacity="0.45"/>
+  </g>
+  <g stroke="#8a8375" stroke-width="2">
+    <line x1="465" y1="622" x2="530" y2="646"/>
+    <line x1="488" y1="614" x2="553" y2="638"/>
+  </g>
+
+  <!-- outgoing: gold cubes rising in an arc, brighter as they climb -->
+  <g>
+    <path d="M 880 560 C 980 500 1060 420 1150 320" fill="none" stroke="rgba(195,162,104,0.3)" stroke-width="1.6" stroke-dasharray="2 8"/>
+    <!-- cube 1 -->
+    <g transform="translate(905,540)">
+      <polygon points="0,-16 28,-2 0,12 -28,-2" fill="url(#a-gold)"/>
+      <polygon points="28,-2 0,12 0,40 28,26" fill="#8a6f3c"/>
+      <polygon points="-28,-2 0,12 0,40 -28,26" fill="#5e4a26"/>
+    </g>
+    <g transform="translate(1010,452) scale(0.85)">
+      <polygon points="0,-16 28,-2 0,12 -28,-2" fill="url(#a-gold)"/>
+      <polygon points="28,-2 0,12 0,40 28,26" fill="#8a6f3c"/>
+      <polygon points="-28,-2 0,12 0,40 -28,26" fill="#5e4a26"/>
+    </g>
+    <g transform="translate(1110,360) scale(0.7)">
+      <circle r="40" fill="#f0dcae" opacity="0.25" filter="url(#a-glow)"/>
+      <polygon points="0,-16 28,-2 0,12 -28,-2" fill="url(#a-gold)"/>
+      <polygon points="28,-2 0,12 0,40 28,26" fill="#8a6f3c"/>
+      <polygon points="-28,-2 0,12 0,40 -28,26" fill="#5e4a26"/>
+    </g>
+  </g>
+
+  <!-- ambient particles -->
+  <g fill="#ece7dd">
+    <circle cx="330" cy="240" r="2" opacity="0.4"/>
+    <circle cx="520" cy="170" r="1.6" opacity="0.3"/>
+    <circle cx="1260" cy="210" r="2.2" opacity="0.45"/>
+    <circle cx="1380" cy="470" r="1.6" opacity="0.3"/>
+    <circle cx="240" cy="470" r="1.8" opacity="0.35"/>
+    <circle cx="1090" cy="140" r="1.5" opacity="0.3"/>
+  </g>
+
+  <!-- caption chip: uniform pill, right-aligned across the series -->
+  <g transform="translate(1146,790)" font-family="ui-monospace, monospace">
+    <rect width="384" height="52" rx="26" fill="rgba(19,19,22,0.88)" stroke="rgba(195,162,104,0.4)"/>
+    <circle cx="26" cy="26" r="5" fill="#f0dcae"/>
+    <text x="48" y="33" fill="#c3a268" font-size="17" letter-spacing="2.5">PAPER IN · DATA OUT</text>
+  </g>
+</svg>

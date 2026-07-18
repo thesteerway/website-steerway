@@ -1,0 +1,20 @@
+{
+  "purpose": "Sanitized brand assets for The Steerway redesign. Only these assets should be used.",
+  "do_not_use_old_assets": true,
+  "primary_logo": "01_primary_logo/steerway_primary_s_path_mark__USE_FOR_LOADER_LOGO_PORTAL__on_dark.svg",
+  "header_logo": "01_primary_logo/steerway_primary_header_lockup__USE_FOR_HEADER_ON_DARK.svg",
+  "secondary_needle": "02_secondary_needle/steerway_secondary_needle__USE_FOR_INTERNAL_PAGE_MAPPING_ONLY.svg",
+  "footer_wordmark": "03_footer_wordmark/steerway_footer_utility_wordmark_period__USE_FOR_FINAL_FOOTER_PAYOFF.svg",
+  "colors": {
+    "obsidian": "#0A0A0C",
+    "graphite": "#131316",
+    "ivory": "#ECE7DD",
+    "champagne": "#C3A268",
+    "bronze": "#96762F"
+  },
+  "fonts_to_load_via_css": [
+    "Fraunces",
+    "IBM Plex Mono",
+    "Inter"
+  ]
+}

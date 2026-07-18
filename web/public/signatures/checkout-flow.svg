@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900">
+  <defs>
+    <radialGradient id="d-bloom" cx="0.5" cy="0.42" r="0.55">
+      <stop offset="0" stop-color="#c3a268" stop-opacity="0.2"/>
+      <stop offset="1" stop-color="#c3a268" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="d-gold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f5e6c4"/>
+      <stop offset="1" stop-color="#b4924f"/>
+    </linearGradient>
+    <filter id="d-glow" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="12"/>
+    </filter>
+    <filter id="d-soft" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="28"/>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="900" fill="#0a0a0c"/>
+  <g stroke="rgba(236,231,221,0.06)">
+    <line x1="800" y1="540" x2="60" y2="900"/><line x1="800" y1="540" x2="360" y2="900"/><line x1="800" y1="540" x2="660" y2="900"/><line x1="800" y1="540" x2="940" y2="900"/><line x1="800" y1="540" x2="1240" y2="900"/><line x1="800" y1="540" x2="1540" y2="900"/>
+    <path d="M 220 700 Q 800 660 1380 700" fill="none"/>
+    <path d="M 100 790 Q 800 740 1500 790" fill="none"/>
+  </g>
+  <rect width="1600" height="900" fill="url(#d-bloom)"/>
+
+  <!-- THE FUNNEL: three glass rings narrowing to one gold cube -->
+  <ellipse cx="800" cy="742" rx="360" ry="52" fill="#000" opacity="0.6" filter="url(#d-soft)"/>
+
+  <!-- pedestal -->
+  <g>
+    <polygon points="800,624 990,694 800,764 610,694" fill="rgba(236,231,221,0.05)" stroke="rgba(236,231,221,0.35)" stroke-width="1.5"/>
+    <polygon points="990,694 800,764 800,798 990,728" fill="rgba(236,231,221,0.025)" stroke="rgba(236,231,221,0.2)"/>
+    <polygon points="610,694 800,764 800,798 610,728" fill="rgba(0,0,0,0.4)" stroke="rgba(236,231,221,0.2)"/>
+  </g>
+
+  <!-- rings, wide to narrow -->
+  <g fill="none">
+    <ellipse cx="800" cy="220" rx="360" ry="86" stroke="rgba(236,231,221,0.4)" stroke-width="1.8"/>
+    <ellipse cx="800" cy="220" rx="360" ry="86" stroke="rgba(236,231,221,0.15)" stroke-width="8" filter="url(#d-glow)"/>
+    <ellipse cx="800" cy="392" rx="235" ry="58" stroke="rgba(236,231,221,0.5)" stroke-width="1.8"/>
+    <ellipse cx="800" cy="540" rx="120" ry="32" stroke="url(#d-gold)" stroke-width="2.5"/>
+    <ellipse cx="800" cy="540" rx="120" ry="32" stroke="url(#d-gold)" stroke-width="2.5" filter="url(#d-glow)" opacity="0.6"/>
+  </g>
+  <!-- guide meridians joining the rings -->
+  <g stroke="rgba(195,162,104,0.25)" fill="none">
+    <path d="M 440 220 C 480 340 620 480 680 540"/>
+    <path d="M 1160 220 C 1120 340 980 480 920 540"/>
+  </g>
+
+  <!-- droplets: many enter, fewer continue, one lands -->
+  <g fill="#ece7dd">
+    <circle cx="560" cy="196" r="5" opacity="0.65"/>
+    <circle cx="700" cy="164" r="5" opacity="0.75"/>
+    <circle cx="860" cy="152" r="5" opacity="0.7"/>
+    <circle cx="1010" cy="188" r="5" opacity="0.6"/>
+    <circle cx="1120" cy="238" r="5" opacity="0.5"/>
+    <circle cx="680" cy="360" r="5" opacity="0.75"/>
+    <circle cx="880" cy="344" r="5" opacity="0.7"/>
+    <circle cx="790" cy="416" r="5" opacity="0.8"/>
+  </g>
+  <g fill="#f0dcae">
+    <circle cx="812" cy="508" r="5.5" opacity="0.95"/>
+    <circle cx="812" cy="508" r="12" opacity="0.25" filter="url(#d-glow)"/>
+  </g>
+  <!-- their falling traces -->
+  <g stroke="rgba(236,231,221,0.14)" stroke-width="1.4">
+    <line x1="700" y1="176" x2="694" y2="330"/>
+    <line x1="860" y1="164" x2="872" y2="322"/>
+    <line x1="790" y1="428" x2="806" y2="494"/>
+  </g>
+
+  <!-- the landed order: gold cube on the pedestal, lit -->
+  <g transform="translate(800,610)">
+    <circle r="70" fill="#f0dcae" opacity="0.16" filter="url(#d-glow)"/>
+    <polygon points="0,-34 52,-8 0,18 -52,-8" fill="url(#d-gold)"/>
+    <polygon points="52,-8 0,18 0,66 52,40" fill="#8a6f3c"/>
+    <polygon points="-52,-8 0,18 0,66 -52,40" fill="#5e4a26"/>
+    <!-- checkmark carved on the top face -->
+    <path d="M -14 -10 l 10 9 l 20 -18" fill="none" stroke="#0a0a0c" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <g fill="#ece7dd">
+    <circle cx="330" cy="240" r="2" opacity="0.4"/>
+    <circle cx="520" cy="170" r="1.6" opacity="0.3"/>
+    <circle cx="1260" cy="210" r="2.2" opacity="0.45"/>
+    <circle cx="1380" cy="470" r="1.6" opacity="0.3"/>
+    <circle cx="240" cy="470" r="1.8" opacity="0.35"/>
+    <circle cx="1090" cy="140" r="1.5" opacity="0.3"/>
+  </g>
+
+  <!-- caption chip: uniform pill, right-aligned across the series -->
+  <g transform="translate(1146,790)" font-family="ui-monospace, monospace">
+    <rect width="384" height="52" rx="26" fill="rgba(19,19,22,0.88)" stroke="rgba(195,162,104,0.4)"/>
+    <circle cx="26" cy="26" r="5" fill="#f0dcae"/>
+    <text x="48" y="33" fill="#c3a268" font-size="17" letter-spacing="2.5">CART TO PAID · NO LEAKS</text>
+  </g>
+</svg>
