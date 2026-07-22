@@ -8,3 +8,4 @@ Thumbs.db
 
 # vercel (root-level, in case linked from here)
 .vercel
+.env*

@@ -1496,6 +1496,41 @@ html.intro-lock body {
 .cform-submit {
   align-self: flex-start;
   margin-top: 0.6rem;
+  position: relative;
+  background: #f2dda0;
+  border-color: #f2dda0;
+  box-shadow: 0 0 10px 0px rgba(240, 200, 110, 0.35), 0 8px 22px -10px rgba(240, 200, 110, 0.5);
+  animation: submitPulse 2.6s ease-in-out infinite;
+  transition: box-shadow 0.3s var(--ease-out), transform 0.25s var(--ease-out),
+    background 0.3s var(--ease-out), border-color 0.3s var(--ease-out), color 0.3s var(--ease-out);
+}
+@keyframes submitPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 10px 0px rgba(240, 200, 110, 0.35), 0 8px 22px -10px rgba(240, 200, 110, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 15px 1px rgba(240, 200, 110, 0.5), 0 8px 22px -10px rgba(240, 200, 110, 0.5);
+  }
+}
+.cform-submit:not(:disabled):hover {
+  background: #f7e6b8;
+  border-color: #f7e6b8;
+  animation-play-state: paused;
+  box-shadow: 0 0 16px 1px rgba(240, 200, 110, 0.6), 0 10px 26px -8px rgba(240, 200, 110, 0.6);
+  transform: translateY(-1px);
+}
+.cform-submit:not(:disabled):active {
+  transform: translateY(0);
+  box-shadow: 0 0 8px 0px rgba(240, 200, 110, 0.4), 0 5px 16px -10px rgba(240, 200, 110, 0.45);
+}
+.cform-submit:disabled {
+  animation: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .cform-submit {
+    animation: none;
+  }
 }
 /* two-up field rows */
 .cform-row {
