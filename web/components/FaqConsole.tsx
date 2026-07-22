@@ -18,7 +18,6 @@ export default function FaqConsole() {
   return (
     <section className="faqs" id="faqs" aria-label="Frequently asked questions">
       <header className="faqs-head">
-        <p className="ipage-eyebrow mono">Before you write</p>
         <h2 className="faqs-title">Asked often. Answered once, properly.</h2>
       </header>
 

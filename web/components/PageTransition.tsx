@@ -5,21 +5,22 @@ import { usePathname, useRouter } from "next/navigation";
 import { NEEDLE } from "@/lib/steerway";
 
 /**
- * The needle transition. Clicking an internal link plays a small navigation
- * story instead of a flat wipe:
+ * The navigator transition (refined). Clicking an internal link plays a short
+ * wayfinding gesture, not a flat wipe:
  *
- *  LEAVE   the two brand surfaces (ivory over obsidian, split by the champagne
- *          horizon) rise to cover the viewport while the secondary needle
- *          appears on the horizon line, swinging as it searches for bearing.
- *  LOCK    the needle settles upright with a tick-flash: bearing found.
- *  ENTER   the horizon keeps rising off the top, led by the needle, revealing
- *          the new page underneath; the needle dissolves as it exits.
+ *  LEAVE  the brand's two surfaces (ivory over obsidian, split by the
+ *         champagne horizon) rise to cover the viewport; the secondary needle
+ *         rides the horizon line and settles upright in one decisive motion,
+ *         a champagne tick marking "bearing found".
+ *  ENTER  the horizon keeps rising off the top, led by the needle, revealing
+ *         the new page; the needle dissolves as it exits.
  *
- * Modifier clicks, hash-only links, downloads and external targets pass
- * through untouched. Skipped entirely under prefers-reduced-motion.
+ * This is the concept that read best, with the fussy damped search removed:
+ * one confident settle instead of a wobble. Modifier clicks, hash-only links,
+ * downloads and external targets pass through. Skipped under reduced motion.
  */
-const LEAVE_MS = 620; // cover + search + lock
-const ENTER_MS = 700; // reveal sweep
+const LEAVE_MS = 560; // rise + settle
+const ENTER_MS = 660; // reveal sweep
 
 export default function PageTransition() {
   const router = useRouter();
@@ -28,9 +29,6 @@ export default function PageTransition() {
   const leaving = useRef(false);
   const first = useRef(true);
 
-  // entrance: sweep the cover away once the new route has rendered.
-  // Only plays when WE covered the screen (leave sweep ran); back/forward
-  // navigations without a cover skip it so nothing flashes over content.
   useEffect(() => {
     const el = overlayRef.current!;
     if (first.current) {
@@ -40,12 +38,11 @@ export default function PageTransition() {
     if (!leaving.current) return;
     leaving.current = false;
     el.classList.remove("is-leaving");
-    // force a reflow so leave -> enter always animates
-    void el.offsetWidth;
+    void el.offsetWidth; // reflow so leave -> enter always animates
     el.classList.add("is-entering");
     const t = window.setTimeout(
       () => el.classList.remove("is-entering"),
-      ENTER_MS + 60
+      ENTER_MS + 80
     );
     return () => window.clearTimeout(t);
   }, [pathname]);
@@ -82,8 +79,7 @@ export default function PageTransition() {
       el.classList.add("is-leaving");
       window.setTimeout(() => router.push(href), LEAVE_MS);
     };
-    // capture phase: run BEFORE Next's <Link> click handler, so the cover
-    // sweep always precedes the route swap
+    // capture phase: run BEFORE Next's <Link> click handler
     document.addEventListener("click", onClick, true);
     return () => document.removeEventListener("click", onClick, true);
   }, [pathname, router]);

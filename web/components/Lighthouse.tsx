@@ -49,7 +49,7 @@ export default function Lighthouse() {
       HORIZON = H * 0.72;
       LX = W * 0.85;
       LY = HORIZON - 190 * S; // lantern height above the water
-      stars = Array.from({ length: 80 }, () => ({
+      stars = Array.from({ length: 55 }, () => ({
         x: Math.random() * W,
         y: Math.random() * HORIZON * 0.94,
         r: 0.5 + Math.random() * 1.2,

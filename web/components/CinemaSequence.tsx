@@ -403,12 +403,14 @@ export default function CinemaSequence() {
           onUpdate: (self) => {
             const p = smooth(self.progress);
             // ONE logo on screen: the cinema world stays hidden while the
-            // ticker seal is still travelling toward the opening frame; it
-            // swaps in only at pin start (progress 1), same rect, same frame.
-            // visibility (not opacity) so it cannot fight the finale tween.
+            // ticker seal is still travelling toward the opening frame. The
+            // world seal is un-veiled a hair BEFORE pin start (0.994) so it is
+            // already showing at the exact same rect when the ticker seal is
+            // hidden by the pin toggle -- an overlap of two coincident seals,
+            // never a one-frame gap that would flash the background through.
             stageRef.current?.classList.toggle(
               "world-veiled",
-              self.progress < 1
+              self.progress < 0.994
             );
             const vh = window.innerHeight;
             const vw = window.innerWidth;

@@ -274,46 +274,55 @@ export default function ConsoleForm() {
             </div>
           </div>
 
-          <label className="cform-field cform-select cform-select--narrow">
+          <div className="cform-field">
             <span className="cform-label mono">&gt; {CONTACT.timeline.label}</span>
-            <select
-              value={timeline}
-              onChange={(e) => {
-                setTimeline(e.target.value);
-                recompose(need, e.target.value, budget);
-              }}
-            >
-              <option value="" disabled>
-                {CONTACT.timeline.placeholder}
-              </option>
+            <div className="cform-chips" role="radiogroup" aria-label={CONTACT.timeline.label}>
               {CONTACT.timeline.options.map((o) => (
-                <option key={o} value={o}>
+                <button
+                  type="button"
+                  key={o}
+                  role="radio"
+                  aria-checked={timeline === o}
+                  className={`cform-chip${timeline === o ? " is-on" : ""}`}
+                  onClick={() => {
+                    const next = timeline === o ? "" : o;
+                    setTimeline(next);
+                    recompose(need, next, budget);
+                  }}
+                >
                   {o}
-                </option>
+                </button>
               ))}
-            </select>
-          </label>
+            </div>
+          </div>
 
           <div className="cform-field cform-budget">
             <span className="cform-label mono">
               &gt; {CONTACT.budget.label}
               <span className="cform-budget-value">{fmtBudget(budget)}</span>
             </span>
-            <input
-              className="cform-range"
-              type="range"
-              min={CONTACT.budget.min}
-              max={CONTACT.budget.max}
-              step={CONTACT.budget.step}
-              value={budget}
-              onChange={(e) => {
-                const b = Number(e.target.value);
-                setBudget(b);
-                recompose(need, timeline, b);
-              }}
+            <div
+              className="cform-range-wrap"
               style={{ "--fill": `${(budget / CONTACT.budget.max) * 100}%` } as CSSProperties}
-              aria-label={CONTACT.budget.label}
-            />
+            >
+              <input
+                className="cform-range"
+                type="range"
+                min={CONTACT.budget.min}
+                max={CONTACT.budget.max}
+                step={CONTACT.budget.step}
+                value={budget}
+                onChange={(e) => {
+                  const b = Number(e.target.value);
+                  setBudget(b);
+                  recompose(need, timeline, b);
+                }}
+                aria-label={CONTACT.budget.label}
+              />
+              <span className="cform-drag-hint mono" aria-hidden="true">
+                drag
+              </span>
+            </div>
             <span className="cform-hint mono">{CONTACT.budget.note}</span>
           </div>
 

@@ -1,4 +1,5 @@
 import SealMark from "@/components/SealMark";
+import ScrollCue from "@/components/ScrollCue";
 import { TICKER_ITEMS, TICKER_CUE } from "@/lib/steerway";
 
 /**
@@ -34,7 +35,12 @@ export default function ServiceTickerBridge() {
         </div>
       </div>
 
-      <p className="ticker-cue mono">{TICKER_CUE}</p>
+      {/* the cue reads as a wayfinding label, not a button: the branded
+          scroll needle beneath it tells the eye to keep going down */}
+      <div className="ticker-cue-wrap" aria-hidden="true">
+        <p className="ticker-cue mono">{TICKER_CUE}</p>
+        <ScrollCue />
+      </div>
     </section>
   );
 }

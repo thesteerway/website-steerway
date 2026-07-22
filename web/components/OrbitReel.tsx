@@ -131,8 +131,6 @@ export default function OrbitReel() {
       aria-label="Fields of work"
       data-spine="the orbit"
     >
-      <p className="proof-label mono">{STUDIO.orbitLabel}</p>
-
       <div className="orbit-field" ref={fieldRef}>
         {/* the viewing frame at the orbit's centre */}
         <div className={`orbit-frame glass${current ? " is-live" : ""}`}>

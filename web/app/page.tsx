@@ -3,6 +3,7 @@ import NeedleLoader from "@/components/NeedleLoader";
 import HeroTypographicField from "@/components/HeroTypographicField";
 import ServiceTickerBridge from "@/components/ServiceTickerBridge";
 import HomeCinema from "@/components/HomeCinema";
+import BackToTop from "@/components/BackToTop";
 
 /**
  * V3 locked homepage order:
@@ -20,6 +21,7 @@ export default function Home() {
         <ServiceTickerBridge />
         <HomeCinema />
       </main>
+      <BackToTop />
       <div className="grain" aria-hidden="true" />
     </>
   );

@@ -47,13 +47,8 @@ export const metadata: Metadata = {
       "Websites, AI automation, software, CRM, dashboards and the growth infrastructure that connects them, built by one team.",
   },
   alternates: { canonical: "/" },
-  icons: {
-    icon: [
-      { url: "/brand/04_favicon_and_icons/steerway_favicon-32.png", sizes: "32x32" },
-      { url: "/brand/04_favicon_and_icons/steerway_favicon-48.png", sizes: "48x48" },
-    ],
-    apple: "/brand/04_favicon_and_icons/steerway_apple-touch-icon-180.png",
-  },
+  // favicon comes from the file conventions app/icon.svg + app/apple-icon.png
+  // (the seal on obsidian, with the champagne square)
 };
 
 export default function RootLayout({

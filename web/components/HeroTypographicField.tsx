@@ -34,9 +34,6 @@ export default function HeroTypographicField() {
       const rest = shell.querySelectorAll<HTMLElement>(
         ".hero-subcopy, .hero-ctas, .hero-cue"
       );
-      const items = shell.querySelectorAll<HTMLElement>(
-        ".hero-line, .hero-subcopy, .hero-ctas, .hero-cue"
-      );
 
       // pre-stage everything so nothing flashes before the reveal
       const stage = () => {
@@ -46,31 +43,17 @@ export default function HeroTypographicField() {
         if (field) gsap.set(field, { scale: 1.07, opacity: 0 });
       };
 
-      // depth-staged intro once the loader hands the page over
+      // depth-staged intro once the loader hands the page over. The one-time
+      // mask reveal is kept entirely separate from the scroll fade below.
       const reveal = () => {
-        const tl = gsap.timeline({
-          defaults: { ease: "power3.out" },
-          // the scrubbed hide tween below captured its start values while
-          // everything was still staged at opacity 0; once the intro has
-          // actually revealed the hero, re-capture them at the visible state.
-          // Without this, the first scroll on a hard load interpolated the
-          // CTAs from 0 to 0 and they vanished (the first-visit button glitch).
-          onComplete: () => scrubTween.invalidate(),
-        });
+        const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
         if (field)
           tl.to(field, { scale: 1, opacity: 1, duration: 1.9, ease: "power2.out" }, 0);
-        tl.to(lines, { yPercent: 0, duration: 1.15, stagger: 0.14 }, 0.08)
-          .to(
-            rest,
-            {
-              opacity: 1,
-              y: 0,
-              filter: "blur(0px)",
-              duration: 0.95,
-              stagger: 0.12,
-            },
-            0.5
-          );
+        tl.to(lines, { yPercent: 0, duration: 1.15, stagger: 0.14 }, 0.08).to(
+          rest,
+          { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.95, stagger: 0.12 },
+          0.5
+        );
       };
 
       stage();
@@ -80,20 +63,28 @@ export default function HeroTypographicField() {
         window.addEventListener("steerway:introdone", reveal, { once: true });
       }
 
-      // scrubbed hide/reveal: scrolling past fades the text away, scrolling
-      // back up reveals it again
-      const scrubTween = gsap.to(items, {
-        opacity: 0,
-        y: -56,
-        stagger: 0.06,
-        ease: "none",
-        scrollTrigger: {
-          trigger: rootRef.current,
-          start: "top top",
-          end: "78% top",
-          scrub: true,
-        },
-      });
+      // Scroll fade: the WHOLE text block fades and lifts as one, tied to
+      // scroll. Fading a single element (the shell) instead of per-item with
+      // a stagger removes the desync/stutter that made the reveal-and-fade
+      // read as glitchy, and it can never strand the masked headline: the
+      // mask reveal (above) stays at yPercent 0 permanently, and the shell's
+      // opacity/​y are cleanly restored to 1/0 whenever you return to the top.
+      gsap.fromTo(
+        shell,
+        { opacity: 1, y: 0 },
+        {
+          opacity: 0,
+          y: -46,
+          ease: "none",
+          immediateRender: false,
+          scrollTrigger: {
+            trigger: rootRef.current,
+            start: "top top",
+            end: "70% top",
+            scrub: 0.5,
+          },
+        }
+      );
 
       return () => {
         window.removeEventListener("steerway:introdone", reveal);

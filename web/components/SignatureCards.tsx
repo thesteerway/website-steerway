@@ -25,7 +25,9 @@ export default function SignatureCards() {
       return;
     }
 
-    // reveal is add-only: the zoom-in plays once per card
+    // reveal is add-only: the zoom-in plays once per card. rootMargin trims
+    // the bottom so even the FIRST card is well inside the viewport before it
+    // reveals (otherwise it reads as "already there" on section entry).
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
@@ -35,7 +37,7 @@ export default function SignatureCards() {
           }
         });
       },
-      { threshold: 0.3 }
+      { threshold: 0.15, rootMargin: "0px 0px -18% 0px" }
     );
     cards.forEach((c) => io.observe(c));
 
@@ -78,13 +80,17 @@ export default function SignatureCards() {
       data-spine="the signatures"
     >
       <header className="sigs-head">
-        <p className="proof-label mono">{STUDIO.signaturesLabel}</p>
         <p className="plates-lead">{STUDIO.signaturesLead}</p>
       </header>
 
       <div className="sigs-stack">
         {STUDIO.signatures.map((s, i) => (
-          <article className="sig-card" key={s.id} data-sig={s.id}>
+          <article
+            className="sig-card"
+            key={s.id}
+            data-sig={s.id}
+            style={{ ["--i" as string]: i }}
+          >
             <div className="sig-visual">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img className="sig-still" src={s.still} alt={s.title} />

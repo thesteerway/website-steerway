@@ -26,9 +26,9 @@ export default function SmoothScroll({
     });
 
     lenis.on("scroll", ScrollTrigger.update);
-    if (process.env.NODE_ENV === "development") {
-      (window as unknown as Record<string, unknown>).__lenis = lenis;
-    }
+    // exposed so controls like BackToTop can request a smooth scroll that
+    // stays in sync with Lenis instead of fighting it
+    (window as unknown as Record<string, unknown>).__lenis = lenis;
 
     // The intro loader locks scrolling (overflow hidden); when it finishes,
     // Lenis and ScrollTrigger must re-measure the now-scrollable page.
