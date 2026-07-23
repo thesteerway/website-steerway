@@ -43,8 +43,8 @@ async function loadFont(family: string, query: string) {
 }
 
 export default async function OgImage() {
-  const [frauncesItalic, frauncesRegular, mono] = await Promise.all([
-    loadFont("Fraunces", "ital,wght@1,400"),
+  const [frauncesLight, frauncesLabel, mono] = await Promise.all([
+    loadFont("Fraunces", "wght@340"),
     loadFont("Fraunces", "wght@500"),
     loadFont("IBM+Plex+Mono", "wght@500"),
   ]);
@@ -74,17 +74,17 @@ export default async function OgImage() {
               "radial-gradient(circle, rgba(195,162,104,0.22), rgba(195,162,104,0))",
           }}
         />
-        <div style={{ display: "flex", alignItems: "center", gap: 36 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 30 }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={sealDataUri()} width={120} height={120} alt="" />
+          <img src={sealDataUri()} width={126} height={126} alt="" />
           <div style={{ display: "flex", flexDirection: "column" }}>
             <div
               style={{
                 display: "flex",
-                fontSize: 22,
-                letterSpacing: 10,
+                fontSize: 19,
+                letterSpacing: 8,
                 color: "#ece7dd",
-                fontFamily: "FrauncesRegular, Georgia, serif",
+                fontFamily: "FrauncesLabel, Georgia, serif",
               }}
             >
               THE
@@ -92,12 +92,11 @@ export default async function OgImage() {
             <div
               style={{
                 display: "flex",
-                fontSize: 108,
-                lineHeight: 1,
-                fontStyle: "italic",
+                fontSize: 92,
+                lineHeight: 0.95,
                 color: "#ece7dd",
-                fontFamily: "FrauncesItalic, Georgia, serif",
-                marginTop: 4,
+                fontFamily: "FrauncesLight, Georgia, serif",
+                marginTop: 2,
               }}
             >
               Steerway
@@ -123,15 +122,15 @@ export default async function OgImage() {
     {
       ...size,
       fonts: [
-        frauncesItalic && {
-          name: "FrauncesItalic",
-          data: frauncesItalic,
-          style: "italic" as const,
+        frauncesLight && {
+          name: "FrauncesLight",
+          data: frauncesLight,
+          style: "normal" as const,
           weight: 400 as const,
         },
-        frauncesRegular && {
-          name: "FrauncesRegular",
-          data: frauncesRegular,
+        frauncesLabel && {
+          name: "FrauncesLabel",
+          data: frauncesLabel,
           style: "normal" as const,
           weight: 500 as const,
         },
