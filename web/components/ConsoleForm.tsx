@@ -25,7 +25,6 @@ export default function ConsoleForm() {
   const [exampleI, setExampleI] = useState(0);
   const squareRef = useRef<HTMLSpanElement>(null);
   const dot1Ref = useRef<HTMLSpanElement>(null);
-  const bubbleRef = useRef<HTMLDivElement>(null);
 
   // rotate the textarea example placeholder so the blank never stares back
   useEffect(() => {
@@ -58,42 +57,6 @@ export default function ConsoleForm() {
   const emailOk = /.+@.+\..+/.test(values.email);
   const briefOk = values.brief.trim().length > 0 || need !== "";
   const ready = briefOk && values.name.trim().length > 0 && emailOk;
-
-  // Lazarev-style floating CTA: once the brief is sendable, a small bubble
-  // trails the cursor with inertia, nudging you to send.
-  useEffect(() => {
-    if (!ready || sent) return;
-    if (!window.matchMedia("(pointer: fine)").matches) return;
-    const el = bubbleRef.current;
-    if (!el) return;
-    let tx = 0;
-    let ty = 0;
-    let x = 0;
-    let y = 0;
-    let seen = false;
-    let raf = 0;
-    const onMove = (e: MouseEvent) => {
-      tx = e.clientX;
-      ty = e.clientY;
-      if (!seen) {
-        seen = true;
-        x = tx;
-        y = ty;
-      }
-    };
-    const tick = () => {
-      x += (tx - x) * 0.16;
-      y += (ty - y) * 0.16;
-      el.style.transform = `translate(${x}px, ${y}px) translate(1.2rem, 1.2rem)`;
-      raf = requestAnimationFrame(tick);
-    };
-    window.addEventListener("mousemove", onMove, { passive: true });
-    raf = requestAnimationFrame(tick);
-    return () => {
-      window.removeEventListener("mousemove", onMove);
-      cancelAnimationFrame(raf);
-    };
-  }, [ready, sent]);
 
   const status = sent
     ? CONTACT.status.sent
@@ -368,13 +331,6 @@ export default function ConsoleForm() {
           })}
         </ol>
       </aside>
-
-      {ready && !sent && (
-        <div className="console-cta-bubble" ref={bubbleRef} aria-hidden="true">
-          send it
-          <ArrowUpRight />
-        </div>
-      )}
     </div>
   );
 }

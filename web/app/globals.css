@@ -1595,47 +1595,6 @@ html.intro-lock body {
     transform: scale(1);
   }
 }
-/* Lazarev floating "send it" CTA that trails the cursor when the brief is ready */
-.console-cta-bubble {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 60;
-  pointer-events: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  padding: 0.6rem 1rem;
-  border-radius: 999px;
-  background: var(--champagne);
-  color: var(--obsidian);
-  font-family: var(--font-mono);
-  font-size: 0.64rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  box-shadow: var(--champagne-glow);
-  animation: bubbleIn 0.4s var(--ease-out);
-  will-change: transform;
-}
-.console-cta-bubble svg {
-  width: 12px;
-  height: 12px;
-}
-@keyframes bubbleIn {
-  from {
-    opacity: 0;
-    scale: 0.6;
-  }
-  to {
-    opacity: 1;
-    scale: 1;
-  }
-}
-@media (pointer: coarse) {
-  .console-cta-bubble {
-    display: none;
-  }
-}
 .cform-select--narrow {
   max-width: 22rem;
 }

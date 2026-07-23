@@ -61,6 +61,8 @@ export default function NeedleLoader() {
     let finished = false;
     let calibrated = false;
     let lastTouchY = 0;
+    // set while the page is held on the hero after the intro; call to release
+    let releaseHold: (() => void) | null = null;
     const born = performance.now();
 
     const root = rootRef.current!;
@@ -131,14 +133,59 @@ export default function NeedleLoader() {
     const finish = () => {
       finished = true;
       gsap.ticker.remove(tick);
-      html.classList.remove("intro-lock");
-      html.classList.add("entered");
-      window.dispatchEvent(new Event("steerway:introdone"));
+      // the intro's own scroll drivers are done with
       window.removeEventListener("wheel", onWheel);
       window.removeEventListener("touchstart", onTouchStart);
       window.removeEventListener("touchmove", onTouchMove);
       window.removeEventListener("keydown", onKey);
+
+      // hand the page over: the hero reveals now
+      html.classList.add("entered");
+      window.dispatchEvent(new Event("steerway:introdone"));
       setDone(true);
+
+      // ...but ANCHOR the reader on the hero. The very flick that finished
+      // the intro would otherwise keep flowing into the page and carry them
+      // straight past the hero before they have seen it. So the page stays
+      // held at the top until that gesture has actually stopped; the next
+      // fresh scroll then moves the page exactly as normal.
+      const lenis = (
+        window as unknown as {
+          __lenis?: {
+            stop?: () => void;
+            start?: () => void;
+            scrollTo?: (t: number, o?: object) => void;
+          };
+        }
+      ).__lenis;
+      window.scrollTo(0, 0);
+      lenis?.scrollTo?.(0, { immediate: true });
+      lenis?.stop?.();
+
+      let quiet = 0;
+      let cap = 0;
+      const release = () => {
+        window.clearTimeout(quiet);
+        window.clearTimeout(cap);
+        window.removeEventListener("wheel", swallow);
+        window.removeEventListener("touchmove", swallow);
+        html.classList.remove("intro-lock");
+        lenis?.start?.();
+        releaseHold = null;
+      };
+      const swallow = (e: Event) => {
+        e.preventDefault();
+        window.scrollTo(0, 0);
+        window.clearTimeout(quiet);
+        quiet = window.setTimeout(release, 420);
+      };
+      releaseHold = release;
+      window.addEventListener("wheel", swallow, { passive: false });
+      window.addEventListener("touchmove", swallow, { passive: false });
+      // if the gesture already ended, release almost immediately
+      quiet = window.setTimeout(release, 420);
+      // and never trap the reader, however long they keep flicking
+      cap = window.setTimeout(release, 2000);
     };
 
     const tick = () => {
@@ -176,13 +223,13 @@ export default function NeedleLoader() {
 
     return () => {
       gsap.ticker.remove(tick);
-      if (!finished) {
-        html.classList.remove("intro-lock");
-        window.removeEventListener("wheel", onWheel);
-        window.removeEventListener("touchstart", onTouchStart);
-        window.removeEventListener("touchmove", onTouchMove);
-        window.removeEventListener("keydown", onKey);
-      }
+      // if we unmount while still holding the page on the hero, let it go
+      releaseHold?.();
+      html.classList.remove("intro-lock");
+      window.removeEventListener("wheel", onWheel);
+      window.removeEventListener("touchstart", onTouchStart);
+      window.removeEventListener("touchmove", onTouchMove);
+      window.removeEventListener("keydown", onKey);
     };
   }, []);
 
